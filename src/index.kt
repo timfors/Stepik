@@ -10,15 +10,15 @@ fun main(args: Array<String>) {
         print("\nВыберите команду:\n1) Добавить пару\n2) Найти пару\n3) Удалить пару\n4)закончить\n")
         when (readLine().toString().replace(" ", "")) {
             "1" -> {
-                dataBase.addPair(readLine(), readLine())
+                dataBase.addPair(readLine()!!, readLine()!!)
                 print("done")
             }
             "2" -> {
-                var elements = dataBase.findPair(readLine(), readLine())
+                var elements = dataBase.findPair(readLine()!!, readLine()!!)
                 for (element in elements ) print(element.contentToString())
             }
             "3" -> {
-                var count = dataBase.delete(readLine(), readLine())
+                var count = dataBase.delete(readLine()!!, readLine()!!)
                 print("$count пар удалено")
             }
             "4" -> done = true
