@@ -10,24 +10,21 @@ class Repository(val components: ArrayList<Array<String?>> = ArrayList()) {
     }
 
     fun findPair(key: String?, value: String?): List<Array<String?>> {
-        if (key.toString().replace(" ", "") == "") {
-            return this.components.filter { it: Array<String?> -> value in it[1] }
-        } else if (value.toString().replace(" ", "") == "") {
-            return this.components.filter { it: Array<String?> -> key in it[0] }
+        //проверка на пустые значения
+        if (key.trim() == "") {
+            return this.components.filter { it: Array<String?> -> value.toLowerCase() in it[1].toLowerCase() }
+        } else if (value.trim() == "") {
+            return this.components.filter { it: Array<String?> -> key.toLowerCase() in it[0].toLowerCase() }
         }
-
-        return this.components.filter { it: Array<String?> -> key in it[0] }
-                .filter { it: Array<String?> -> value in it[1] }
+        
+        return this.components.filter { it: Array<String?> -> key.toLowerCase() in it[0].toLowerCase() }
+                .filter { it: Array<String?> -> value.toLowerCase() in it[1].toLowerCase() }
 
     }
 
     fun delete(key: String?, value: String?): Int {
-        var found = this.findPair(key, value)
-        var count: Int = 0
-        for (element in found) {
-            this.components.remove(element)
-            count++
-        }
-        return count
+        //Кол-во удаленных пар
+        return this.findPair(key, value)
+            .map(pair -> this.components.remove(pair)).count()
     }
 }
