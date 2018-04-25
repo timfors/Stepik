@@ -11,13 +11,13 @@ class Repository(val components: ArrayList<Array<String?>> = ArrayList()) {
 
     fun findPair(key: String?, value: String?): List<Array<String?>> {
         if (key.toString().replace(" ", "") == "") {
-            return this.components.filter { it: Array<String?> -> value == it[1] }
+            return this.components.filter { it: Array<String?> -> value in it[1] }
         } else if (value.toString().replace(" ", "") == "") {
-            return this.components.filter { it: Array<String?> -> key == it[0] }
+            return this.components.filter { it: Array<String?> -> key in it[0] }
         }
 
-        return this.components.filter { it: Array<String?> -> key in it }
-                .filter { it: Array<String?> -> value in it }
+        return this.components.filter { it: Array<String?> -> key in it[0] }
+                .filter { it: Array<String?> -> value in it[1] }
 
     }
 
